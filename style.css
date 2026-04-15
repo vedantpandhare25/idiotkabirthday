@@ -1,0 +1,135 @@
+:root {
+    --primary-color: #f4a261; /* Warm orange for dogs */
+    --secondary-color: #2a9d8f; /* Cool teal for cats */
+    --bg-color: #fff8f0;
+    --text-color: #264653;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    /* Subtle background pattern */
+    background-image: radial-gradient(var(--primary-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+.paw {
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.intro h2 {
+    color: var(--secondary-color);
+}
+
+.game-container {
+    text-align: center;
+    background: #fdfbf7;
+    border: 3px dashed var(--primary-color);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.score-board {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    color: var(--secondary-color);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+}
+
+.hole {
+    width: 100px;
+    height: 100px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    cursor: pointer;
+    box-shadow: inset 0 6px 12px rgba(0,0,0,0.15);
+    user-select: none;
+    transition: transform 0.1s ease;
+}
+
+.hole:active {
+    transform: scale(0.9); /* Satisfying click effect */
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #e76f51;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+}

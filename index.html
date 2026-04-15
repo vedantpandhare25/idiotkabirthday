@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday! 🎀</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f4a7b9;
+    --rose-light: #fce4ec;
+    --rose-deep: #c2185b;
+    --lavender: #e1bee7;
+    --mint: #b2dfdb;
+    --cream: #fff8f0;
+    --gold: #f9c74f;
+    --soft-brown: #8d6e63;
+    --text-dark: #3e2723;
+    --text-mid: #6d4c41;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ---- CONFETTI ---- */
+  .confetti-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 999;
+  }
+  .confetti-piece {
+    position: absolute; width: 10px; height: 10px;
+    border-radius: 2px;
+    animation: confettiFall linear infinite;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 30%, #e1bee7 60%, #fce4ec 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(249,199,79,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(194,24,91,0.1) 0%, transparent 40%);
+  }
+
+  .floating-paws {
+    position: absolute; inset: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .paw {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0.18;
+    animation: floatPaw ease-in-out infinite;
+  }
+  @keyframes floatPaw {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-18px) rotate(10deg); }
+  }
+
+  .hero-badge {
+    background: var(--rose-deep);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    color: var(--rose-deep);
+    text-shadow: 3px 3px 0 rgba(244,167,185,0.5);
+    line-height: 1.1;
+    animation: fadeInDown 1s ease 0.2s both;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--text-mid);
+    font-style: italic;
+    margin: 1rem 0 2rem;
+    animation: fadeInDown 1s ease 0.4s both;
+  }
+
+  .hero-scroll {
+    animation: bounce 2s infinite 2s;
+    font-size: 1.5rem; cursor: pointer;
+    opacity: 0.6;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- WISH SECTION ---- */
+  .section {
+    padding: 5rem 1.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose-deep);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .wish-card {
+    background: white;
+    border-radius: 32px;
+    padding: 3rem 3.5rem;
+    box-shadow: 0 20px 60px rgba(194,24,91,0.08), 0 4px 16px rgba(194,24,91,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .wish-card::after {
+    content: '🌸';
+    position: absolute; bottom: -20px; right: -20px;
+    font-size: 7rem; opacity: 0.07;
+  }
+
+  .wish-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--rose-deep);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .wish-card p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+  .wish-card .signature {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    color: var(--rose-deep);
+    margin-top: 1.5rem;
+  }
+
+  /* ---- PHOTO SECTION ---- */
+  .photo-section {
+    background: linear-gradient(135deg, #fce4ec, #e1bee7);
+    padding: 5rem 1.5rem;
+    text-align: center;
+  }
+  .photo-wrapper {
+    display: inline-block;
+    position: relative;
+    margin-top: 2rem;
+  }
+  .photo-frame {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose-deep), #9c27b0);
+    padding: 6px;
+    box-shadow: 0 16px 48px rgba(194,24,91,0.25);
+    display: inline-block;
+    animation: pulseFrame 3s ease-in-out infinite;
+  }
+  @keyframes pulseFrame {
+    0%,100% { box-shadow: 0 16px 48px rgba(194,24,91,0.25); }
+    50% { box-shadow: 0 20px 64px rgba(194,24,91,0.4); }
+  }
+  .photo-inner {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: #fce4ec;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    font-size: 4rem;
+    color: var(--rose-deep);
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-inner span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--rose-deep);
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+  .photo-badge {
+    position: absolute;
+    top: 10px; right: -10px;
+    background: var(--gold);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    animation: spinBadge 4s ease-in-out infinite;
+  }
+  @keyframes spinBadge {
+    0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg)}
+  }
+
+  /* ---- FROM MY SIDE ---- */
+  .from-me-section {
+    background: white;
+    padding: 5rem 1.5rem;
+  }
+  .from-me-inner {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  @media(max-width:640px){ .from-me-inner{ grid-template-columns:1fr; } }
+
+  .gift-card {
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .gift-card:hover { transform: translateY(-6px); }
+  .gift-card .icon { font-size: 3rem; margin-bottom: 1rem; }
+  .gift-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; margin-bottom: 0.6rem;
+    color: var(--text-dark);
+  }
+  .gift-card p { font-size: 0.9rem; line-height: 1.7; color: var(--text-mid); }
+  .gc1 { background: #fce4ec; }
+  .gc2 { background: #e8f5e9; }
+  .gc3 { background: #fff3e0; }
+  .gc4 { background: #e8eaf6; }
+
+  /* ---- DIVIDER ---- */
+  .paw-divider {
+    text-align: center; padding: 1rem 0;
+    font-size: 1.5rem; opacity: 0.4;
+    letter-spacing: 8px;
+  }
+
+  /* ---- GAME SECTION ---- */
+  .game-section {
+    background: linear-gradient(160deg, #fce4ec 0%, #e1bee7 50%, #fce4ec 100%);
+    padding: 5rem 1.5rem;
+    text-align: center;
+  }
+  .game-section h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--rose-deep);
+    margin-bottom: 0.5rem;
+  }
+  .game-section .game-desc {
+    color: var(--text-mid);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .game-container {
+    max-width: 520px; margin: 0 auto;
+    background: white;
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: 0 16px 48px rgba(194,24,91,0.1);
+  }
+
+  .game-stats {
+    display: flex; justify-content: space-between;
+    margin-bottom: 1.2rem;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .stat-pill {
+    background: var(--rose-light);
+    color: var(--rose-deep);
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+  }
+
+  .game-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; margin-bottom: 1.2rem;
+  }
+
+  .card-cell {
+    aspect-ratio: 1;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f48fb1, #ce93d8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.3s ease;
+    user-select: none;
+    border: none;
+  }
+  .card-cell:hover:not(.matched):not(.revealed) { transform: scale(1.07); }
+  .card-cell.hidden { background: linear-gradient(135deg, #f48fb1, #ce93d8); }
+  .card-cell.hidden::after { content: '🐾'; font-size: 1.4rem; }
+  .card-cell.revealed { background: white; box-shadow: 0 4px 12px rgba(194,24,91,0.15); border: 2px solid var(--rose); }
+  .card-cell.matched { background: #e8f5e9; opacity: 0.6; cursor: default; border: 2px solid #a5d6a7; }
+
+  .game-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--rose-deep);
+    min-height: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+  }
+
+  .game-btn {
+    background: var(--rose-deep);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(194,24,91,0.3);
+  }
+  .game-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(194,24,91,0.35); }
+  .game-btn:active { transform: scale(0.97); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--rose-deep);
+    color: white;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  footer h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  footer p { font-size: 0.9rem; opacity: 0.75; line-height: 1.8; }
+  .footer-emojis { font-size: 2rem; margin: 1rem 0; letter-spacing: 8px; }
+
+  /* ---- SCROLL ANIMATIONS ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  /* Styles for all modern smartphones */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 90%; /* Use percentages instead of fixed pixels */
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem; /* Use 'rem' units so text scales nicely */
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<div class="confetti-container" id="confetti"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="floating-paws" id="pawField"></div>
+  <div class="hero-badge">🎉 Something Different this Year!</div>
+  <h1 class="hero-title">Happy Birthday Idiott!</h1><br>
+  <p class="hero-subtitle">To the most stupid girl in the world 🐾</p>
+  <div class="hero-scroll" onclick="document.getElementById('wish').scrollIntoView({behavior:'smooth'})">↓</div>
+</section>
+
+<!-- BIRTHDAY WISH -->
+<div id="wish" style="background: linear-gradient(180deg,#fce4ec,var(--cream))">
+<div class="section reveal">
+  <p class="section-label">🌸 a little letter</p>
+  <div class="wish-card">
+    <h2>Happiest Birthday Chashmish🏳️‍🌈,</h2>
+    <p>
+        Thank youu soo muchh for being with me whenever I wanted you ups and downs✨ 
+    </p>
+    <p>
+        Ignoring all my stupid things,my chutiyapa😅, and still there with me, very grateful to have you as my bestie 🧿
+    </p>
+    <p>
+        Be there with me always "Ab tak sath hai aur sath me he bade honge" you have no choice or else i will kill you definitely👊
+    </p>
+    <p>Wishing you a birthday as wonderful as you are! 🐱🐶🎂</p>
+    <div class="signature">— Your Best Friend 💕</div>
+  </div>
+</div>
+</div>
+
+<!-- PHOTO PLACEHOLDER -->
+<div class="photo-section">
+  <div class="reveal">
+    <p class="section-label" style="color:var(--rose-deep)">📸 that's you!</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--text-dark);margin-bottom:0.3rem;">The Birthday Queen</h2>
+    
+    <div class="photo-wrapper">
+      <div class="photo-frame">
+        <div class="photo-inner">
+          <img src="your-photo.jpeg" style="width:100%;height:100%;object-fit:fill;border-radius:100%"srcset="logo-highres.png 2x"> 
+          
+        </div>
+      </div>
+      <div class="photo-badge">🎂 It's Her Day!</div>
+    </div>
+  </div>
+</div>
+
+<!-- FROM MY SIDE -->
+<div class="from-me-section">
+<div class="reveal" style="max-width:860px;margin:0 auto;text-align:center">
+  <p class="section-label"></p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--text-dark);margin-bottom:0.25rem;"></h2>
+  <p style="color:var(--text-mid);font-size:0.9rem;margin-bottom:0"></p>
+</div>
+<div class="from-me-inner">
+ <!--  <div class="gift-card gc1 reveal">
+    <div class="icon">🐾</div>
+    <h3></h3>
+    <p>I hereby gift you an unlimited supply of cute cats and dogs to cuddle, pet, and coo over — starting today.</p>
+  </div> -->
+  <div class="gift-card gc2 reveal">
+    <div class="icon">🌟</div>
+    <h3>One full year of good vibes only</h3>
+    <p>Move ON!! Idiot,Be happy </p>
+  </div>
+  <div class="gift-card gc3 reveal">
+    <div class="icon">🎀</div>
+    <h3>My absolute best friendship</h3>
+    <p>I'm always by your side no matter what the situation is..💛</p>
+  </div>
+ <!-- <div class="gift-card gc4 reveal">
+    <div class="icon">✨</div>
+    <h3>Permission to be extra today</h3>
+    <p>Wear the sparkly outfit. Eat the extra slice. Post all the selfies. It's YOUR day — own it completely.</p>
+  </div>-->
+</div>
+</div>
+
+<div class="paw-divider">🐾 🐶 🐾 🐱 🐾</div>
+
+<!-- GAME -->
+<div class="game-section">
+  <div class="reveal">
+    <h2>Birthday Memory Game!</h2>
+    <p class="game-desc">Find all the matching cat & dog pairs — can you beat 20 moves? 🐱🐶</p>
+    <div class="game-container">
+      <div class="game-stats">
+        <span class="stat-pill">⏱️ Time: <span id="timer">0s</span></span>
+        <span class="stat-pill">🔄 Moves: <span id="moves">0</span></span>
+        <span class="stat-pill">🎯 Pairs: <span id="pairs">0/8</span></span>
+      </div>
+      <div class="game-grid" id="gameGrid"></div>
+      <div class="game-message" id="gameMsg">Tap any card to start! 🐾</div>
+      <button class="game-btn" onclick="startGame()">🔄 New Game</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <h3>Happy Birthday!</h3>
+  <div class="footer-emojis">🐱 🎂 🐶</div>
+  <p>Made for an Idiot</p>
+</footer>
+
+<script>
+/* ---- CONFETTI ---- */
+(function(){
+  const colors=['#f4a7b9','#e1bee7','#f9c74f','#b2dfdb','#f48fb1','#ce93d8','#fff176'];
+  const cont=document.getElementById('confetti');
+  for(let i=0;i<55;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.cssText=`
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      animation-duration:${3+Math.random()*5}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    cont.appendChild(p);
+  }
+})();
+
+/* ---- FLOATING PAWS ---- */
+(function(){
+  const emojis=['🐾','🐱','🐶','🌸','💕','✨','🎀','🌟'];
+  const field=document.getElementById('pawField');
+  for(let i=0;i<18;i++){
+    const el=document.createElement('div');
+    el.className='paw';
+    el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.cssText=`
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${4+Math.random()*4}s;
+      animation-delay:${Math.random()*4}s;
+      font-size:${1.2+Math.random()*1.5}rem;
+    `;
+    field.appendChild(el);
+  }
+})();
+
+/* ---- SCROLL REVEAL ---- */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ---- MEMORY GAME ---- */
+const EMOJIS=['🐱','🐶','🐾','🐈','🐩','🦮','😺','🐕'];
+let cards=[], revealed=[], matchedCount=0, moves=0, timerInterval, seconds=0, gameStarted=false;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startGame(){
+  clearInterval(timerInterval);
+  seconds=0; moves=0; matchedCount=0; revealed=[]; gameStarted=false;
+  document.getElementById('timer').textContent='0s';
+  document.getElementById('moves').textContent='0';
+  document.getElementById('pairs').textContent='0/8';
+  document.getElementById('gameMsg').textContent='Tap any card to start! 🐾';
+
+  cards=shuffle([...EMOJIS,...EMOJIS]);
+  const grid=document.getElementById('gameGrid');
+  grid.innerHTML='';
+  cards.forEach((emoji,i)=>{
+    const cell=document.createElement('button');
+    cell.className='card-cell hidden';
+    cell.dataset.index=i;
+    cell.dataset.emoji=emoji;
+    cell.addEventListener('click',()=>flipCard(cell));
+    grid.appendChild(cell);
+  });
+}
+
+function flipCard(cell){
+  if(cell.classList.contains('matched') || cell.classList.contains('revealed')) return;
+  if(revealed.length===2) return;
+
+  if(!gameStarted){
+    gameStarted=true;
+    timerInterval=setInterval(()=>{
+      seconds++;
+      document.getElementById('timer').textContent=seconds+'s';
+    },1000);
+  }
+
+  cell.classList.remove('hidden');
+  cell.classList.add('revealed');
+  cell.textContent=cell.dataset.emoji;
+  revealed.push(cell);
+
+  if(revealed.length===2){
+    moves++;
+    document.getElementById('moves').textContent=moves;
+    checkMatch();
+  }
+}
+
+function checkMatch(){
+  const [a,b]=revealed;
+  if(a.dataset.emoji===b.dataset.emoji){
+    a.classList.remove('revealed'); a.classList.add('matched');
+    b.classList.remove('revealed'); b.classList.add('matched');
+    matchedCount++;
+    document.getElementById('pairs').textContent=matchedCount+'/8';
+    revealed=[];
+
+    const msgs=['🌟 Purrfect match!','🐾 You found one!','🎀 Pawsome!','💕 Yes! That\'s a pair!','🌸 So good!'];
+    document.getElementById('gameMsg').textContent=msgs[Math.floor(Math.random()*msgs.length)];
+
+    if(matchedCount===8){
+      clearInterval(timerInterval);
+      const perfect=moves<=20;
+      document.getElementById('gameMsg').textContent=
+        perfect
+        ? `🎉 Incredible! ${moves} moves & ${seconds}s — you're a genius! 🐾💕`
+        : `🎂 You did it! ${moves} moves & ${seconds}s — well played, birthday star!`;
+    }
+  } else {
+    document.getElementById('gameMsg').textContent='🙈 Not quite — try again!';
+    setTimeout(()=>{
+      a.textContent=''; b.textContent='';
+      a.classList.remove('revealed'); a.classList.add('hidden');
+      b.classList.remove('revealed'); b.classList.add('hidden');
+      revealed=[];
+      if(gameStarted) document.getElementById('gameMsg').textContent='Keep going! 🐾';
+    },900);
+  }
+}
+
+startGame();
+</script>
+</body>
+</html>
